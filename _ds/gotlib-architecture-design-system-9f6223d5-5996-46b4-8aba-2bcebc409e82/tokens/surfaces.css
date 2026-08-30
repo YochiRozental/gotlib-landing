@@ -1,0 +1,26 @@
+:root{
+  /* Radii — architectural, essentially square. Nothing in the brand is pill-shaped
+     except the round accessibility/phone chips. */
+  --radius-0:0px;
+  --radius-1:2px;
+  --radius-2:4px;
+  --radius-round:999px;
+
+  /* Borders */
+  --border-hairline:1px solid var(--line-hairline); /* @kind other */
+  --border-strong:1px solid var(--line-strong); /* @kind other */
+  --border-accent:1px solid var(--taupe-400); /* @kind other */
+  --border-frame:1px solid var(--taupe-400); /* @kind other */ /* the logo's drawn frame, used as a motif */
+  --frame-inset:10px; /* @kind spacing */ /* offset of an inset drawing frame */
+
+  /* Shadows — sparing, soft, cool-navy tinted. Never a colored glow. */
+  --shadow-none:none;
+  --shadow-card:0 1px 2px rgba(21,45,71,.04),0 8px 24px rgba(21,45,71,.06);
+  --shadow-card-hover:0 2px 4px rgba(21,45,71,.06),0 18px 44px rgba(21,45,71,.12);
+  --shadow-header:0 1px 0 rgba(21,45,71,.08);
+  --shadow-inset-hairline:inset 0 -1px 0 var(--line-hairline);
+
+  /* Blur / transparency — only for the sticky header and photo scrims */
+  --blur-header:saturate(140%) blur(12px); /* @kind other */
+  --glass-header:rgba(251,250,248,.86); /* @kind color */
+}

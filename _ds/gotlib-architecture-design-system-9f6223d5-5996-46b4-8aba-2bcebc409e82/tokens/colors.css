@@ -1,0 +1,60 @@
+/* Gotlib Architecture — color tokens. Base values sampled from the official logo files. */
+:root{
+  /* Base palette */
+  --navy-900:#152d47;   /* deep navy — logo badge background */
+  --navy-700:#1b3448;
+  --navy-600:#233c53;   /* PRIMARY brand navy — logo wordmark */
+  --navy-500:#33506a;
+  --navy-300:#5c6e7e;
+  --navy-200:#929ea9;
+  --navy-100:#c7cfd6;
+  --navy-050:#eef1f4;
+
+  --taupe-600:#8d8271;
+  --taupe-500:#ab9f8c;
+  --taupe-400:#c8beb0;  /* ACCENT taupe — logo mark */
+  --taupe-300:#dcd5ca;
+  --taupe-200:#ebe6df;
+  --taupe-100:#f5f2ed;
+
+  --white:#ffffff;
+  --paper:#fbfaf8;      /* warm off-white page ground */
+  --ink-900:#1a1a1a;
+  --ink-600:#4a4f55;
+  --ink-400:#7b8288;
+
+  /* Semantic — text */
+  --text-heading:var(--navy-600);
+  --text-body:var(--ink-600);
+  --text-muted:var(--ink-400);
+  --text-accent:var(--taupe-600);
+  --text-on-navy:var(--white);
+  --text-on-navy-muted:var(--navy-100);
+  --text-eyebrow:var(--taupe-400);
+
+  /* Semantic — surfaces */
+  --surface-page:var(--paper);
+  --surface-card:var(--white);
+  --surface-card-alt:var(--taupe-100);
+  --surface-inverse:var(--navy-600);
+  --surface-inverse-deep:var(--navy-900);
+  --surface-tint:var(--taupe-200);
+
+  /* Semantic — lines */
+  --line-hairline:var(--taupe-300);
+  --line-strong:var(--navy-600);
+  --line-on-navy:rgba(200,190,176,.45);
+
+  /* Semantic — interactive */
+  --action-bg:var(--navy-600);
+  --action-bg-hover:var(--navy-900);
+  --action-fg:var(--white);
+  --action-accent:var(--taupe-400);
+  --action-accent-hover:var(--taupe-600);
+  --focus-ring:var(--taupe-600);
+
+  /* Overlays used over architectural photography */
+  --scrim-navy:rgba(21,45,71,.62);
+  --scrim-navy-soft:rgba(21,45,71,.28);
+  --scrim-bottom:linear-gradient(to top,rgba(21,45,71,.85) 0%,rgba(21,45,71,0) 62%); /* @kind other */
+}

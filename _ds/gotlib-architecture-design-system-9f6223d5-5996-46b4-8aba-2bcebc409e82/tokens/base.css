@@ -1,0 +1,11 @@
+/* Minimal element defaults. RTL-first: the brand is Hebrew, so `dir="rtl"` is the default
+   authoring assumption and Latin runs are set with dir="ltr". */
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--surface-page);color:var(--text-body);font:var(--type-body);text-wrap:pretty}
+h1,h2,h3,h4,h5{margin:0;color:var(--text-heading);font-family:var(--font-display);line-height:var(--lh-heading)}
+p{margin:0 0 1em}
+a{color:var(--navy-600);text-decoration:none;transition:color var(--dur-fast) var(--ease-standard)}
+a:hover{color:var(--taupe-600)}
+img{max-width:100%;display:block}
+:focus-visible{outline:2px solid var(--focus-ring);outline-offset:2px}
+::selection{background:var(--taupe-300);color:var(--navy-900)}

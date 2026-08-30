@@ -1,0 +1,53 @@
+:root{
+  /* Families */
+  --font-display:'Heebo','Assistant',system-ui,sans-serif;   /* Hebrew headings, logo-adjacent */
+  --font-body:'Assistant','Heebo',system-ui,sans-serif;       /* Hebrew running text, UI */
+  --font-latin:'Jost','Heebo',system-ui,sans-serif;           /* Latin eyebrow labels, "GOTLIB Architecture" */
+
+  /* Scale (desktop) */
+  --fs-hero:clamp(40px,5.2vw,76px); /* @kind font */
+  --fs-display:clamp(32px,3.6vw,52px); /* @kind font */
+  --fs-h2:clamp(28px,2.6vw,40px); /* @kind font */
+  --fs-h3:26px; /* @kind font */
+  --fs-h4:21px; /* @kind font */
+  --fs-h5:18px; /* @kind font */
+  --fs-lead:20px; /* @kind font */
+  --fs-body:17px; /* @kind font */
+  --fs-small:15px; /* @kind font */
+  --fs-caption:13px; /* @kind font */
+  --fs-eyebrow:14px; /* @kind font */
+  --fs-numeral:44px;   /* 01–05 process numerals */
+
+  /* Weights */
+  --fw-thin:200; /* @kind font */
+  --fw-light:300; /* @kind font */
+  --fw-regular:400; /* @kind font */
+  --fw-medium:500; /* @kind font */
+  --fw-semibold:600; /* @kind font */
+  --fw-bold:700; /* @kind font */
+  --fw-black:800; /* @kind font */
+
+  /* Line heights */
+  --lh-tight:1.08; /* @kind font */
+  --lh-heading:1.18; /* @kind font */
+  --lh-lead:1.55; /* @kind font */
+  --lh-body:1.75; /* @kind font */
+
+  /* Tracking — Hebrew is never tracked; Latin eyebrows are tracked wide */
+  --ls-hebrew:0; /* @kind font */
+  --ls-eyebrow:.22em; /* @kind font */
+  --ls-latin-caps:.14em; /* @kind font */
+
+  /* Semantic roles */
+  --type-hero:var(--fw-black) var(--fs-hero)/var(--lh-tight) var(--font-display); /* @kind font */
+  --type-display:var(--fw-bold) var(--fs-display)/var(--lh-heading) var(--font-display); /* @kind font */
+  --type-h2:var(--fw-bold) var(--fs-h2)/var(--lh-heading) var(--font-display); /* @kind font */
+  --type-h3:var(--fw-bold) var(--fs-h3)/1.25 var(--font-display); /* @kind font */
+  --type-h4:var(--fw-bold) var(--fs-h4)/1.3 var(--font-display); /* @kind font */
+  --type-lead:var(--fw-regular) var(--fs-lead)/var(--lh-lead) var(--font-body); /* @kind font */
+  --type-body:var(--fw-regular) var(--fs-body)/var(--lh-body) var(--font-body); /* @kind font */
+  --type-small:var(--fw-regular) var(--fs-small)/1.65 var(--font-body); /* @kind font */
+  --type-caption:var(--fw-regular) var(--fs-caption)/1.5 var(--font-body); /* @kind font */
+  --type-eyebrow:var(--fw-light) var(--fs-eyebrow)/1.2 var(--font-latin); /* @kind font */
+  --type-numeral:var(--fw-thin) var(--fs-numeral)/1 var(--font-latin); /* @kind font */
+}

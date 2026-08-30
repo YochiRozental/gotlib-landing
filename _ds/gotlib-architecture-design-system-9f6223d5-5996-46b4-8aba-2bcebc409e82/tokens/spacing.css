@@ -1,0 +1,21 @@
+:root{
+  --space-1:4px; /* @kind spacing */
+  --space-2:8px; /* @kind spacing */
+  --space-3:12px; /* @kind spacing */
+  --space-4:16px; /* @kind spacing */
+  --space-5:24px; /* @kind spacing */
+  --space-6:32px; /* @kind spacing */
+  --space-7:48px; /* @kind spacing */
+  --space-8:64px; /* @kind spacing */
+  --space-9:96px; /* @kind spacing */
+  --space-10:128px; /* @kind spacing */
+
+  /* Layout */
+  --container-max:1240px; /* @kind spacing */
+  --container-narrow:820px; /* @kind spacing */
+  --gutter:clamp(20px,4vw,64px); /* @kind spacing */
+  --section-y:clamp(64px,8vw,128px); /* @kind spacing */
+  --grid-gap:32px; /* @kind spacing */
+  --header-h:88px; /* @kind spacing */
+  --header-h-compact:64px; /* @kind spacing */
+}

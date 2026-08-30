@@ -1,0 +1,4 @@
+/* Webfonts. NOTE: the studio's original font binaries were not available, so these are
+   Google Fonts substitutions chosen to match the logo and the site's Hebrew/Latin pairing.
+   See readme.md → "Font substitution (needs confirmation)". */
+@import url('https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700;800&family=Assistant:wght@300;400;600;700&family=Jost:wght@200;300;400&display=swap');
