@@ -1,13 +1,11 @@
 import express from 'express';
-import nodemailer from 'nodemailer';
 import crypto from 'node:crypto';
 
 const app = express();
 const PORT = process.env.PORT || 10000;
 const MONDAY_API_TOKEN = process.env.MONDAY_API_TOKEN;
 const ALLOWED_ORIGIN = process.env.ALLOWED_ORIGIN || 'https://landing.gotlib.biz';
-const SMTP_USER = process.env.SMTP_USER;
-const SMTP_APP_PASSWORD = process.env.SMTP_APP_PASSWORD;
+const RESEND_API_KEY = process.env.RESEND_API_KEY;
 const QUESTIONNAIRE_SECRET = process.env.QUESTIONNAIRE_SECRET || MONDAY_API_TOKEN;
 
 const DEALS_BOARD_ID = '1550734529';
@@ -15,6 +13,7 @@ const DEAL_CLIENT_COLUMN_ID = 'link_to_contacts__1';
 const CLIENTS_BOARD_ID = '1550734534';
 const CLIENT_EMAIL_COLUMN_ID = 'email__1';
 const QUESTIONNAIRE_URL = 'https://landing.gotlib.biz';
+const FROM_EMAIL = 'info@gotlib.biz';
 
 app.use(express.json({ limit: '50kb' }));
 
@@ -49,6 +48,29 @@ async function mondayRequest(query, variables = {}) {
   return data.data;
 }
 
+async function sendEmail({ to, subject, text, html }) {
+  const response = await fetch('https://api.resend.com/emails', {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${RESEND_API_KEY}`,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      from: `Gotlib Architecture <${FROM_EMAIL}>`,
+      to: [to],
+      subject,
+      text,
+      html
+    })
+  });
+
+  const data = await response.json().catch(() => ({}));
+  if (!response.ok || !data.id) {
+    throw new Error(`Resend API error (${response.status}): ${JSON.stringify(data)}`);
+  }
+  return data;
+}
+
 function signQuestionnaire(dealId) {
   return crypto.createHmac('sha256', QUESTIONNAIRE_SECRET).update(String(dealId)).digest('hex');
 }
@@ -62,7 +84,7 @@ app.get('/send-questionnaire', async (req, res) => {
   if (!/^\d+$/.test(dealId)) {
     return res.status(400).send(page('לא ניתן לשלוח', 'לא התקבל מזהה עסקה תקין.', false));
   }
-  if (!MONDAY_API_TOKEN || !SMTP_USER || !SMTP_APP_PASSWORD || !QUESTIONNAIRE_SECRET) {
+  if (!MONDAY_API_TOKEN || !RESEND_API_KEY || !QUESTIONNAIRE_SECRET) {
     console.error('Missing server configuration for questionnaire sending');
     return res.status(500).send(page('לא ניתן לשלוח', 'השרת עדיין אינו מוגדר לשליחת השאלון.', false));
   }
@@ -95,20 +117,15 @@ app.get('/send-questionnaire', async (req, res) => {
 
     const signature = signQuestionnaire(dealId);
     const questionnaireLink = `${QUESTIONNAIRE_URL}/?deal=${encodeURIComponent(dealId)}&token=${signature}`;
-    const transporter = nodemailer.createTransport({
-      service: 'gmail',
-      auth: { user: SMTP_USER, pass: SMTP_APP_PASSWORD }
-    });
 
-    await transporter.sendMail({
-      from: `Gotlib Architecture <${SMTP_USER}>`,
+    await sendEmail({
       to: email,
       subject: 'שאלון לקראת תכנון הפרויקט | גוטליב אדריכלות',
-      text: `שלום ${client.name || ''},\n\nמצורף קישור לשאלון קצר לקראת תכנון הפרויקט.\n${questionnaireLink}\n\nתודה,\nגוטליב אדריכלות`,
+      text: `שלום ${client.name || ''},\n\nלקראת תכנון הפרויקט נשמח שתמלאו את השאלון בקישור הבא:\n${questionnaireLink}\n\nתודה,\nגוטליב אדריכלות`,
       html: `<div dir="rtl" style="font-family:Arial,sans-serif;line-height:1.7;font-size:16px"><p>שלום ${client.name || ''},</p><p>לקראת תכנון הפרויקט נשמח שתמלאו את השאלון בקישור הבא:</p><p><a href="${questionnaireLink}" style="display:inline-block;padding:12px 22px;background:#222;color:#fff;text-decoration:none;border-radius:6px">למילוי השאלון</a></p><p>תודה,<br>גוטליב אדריכלות</p></div>`
     });
 
-    console.log(`Questionnaire sent for deal ${dealId} to ${email}`);
+    console.log(`Questionnaire sent via Resend for deal ${dealId} to ${email}`);
     return res.send(page('השאלון נשלח בהצלחה', `השאלון נשלח לכתובת ${email}.`));
   } catch (error) {
     console.error('Questionnaire send failed', error);
@@ -116,8 +133,6 @@ app.get('/send-questionnaire', async (req, res) => {
   }
 });
 
-// The old lead-creation endpoint is intentionally disabled. Questionnaire submissions
-// will be connected to an existing deal instead of creating a new lead.
 app.post('/api/leads', (_req, res) => {
   return res.status(410).json({ ok: false, error: 'Lead creation is disabled' });
 });
