@@ -193,9 +193,10 @@
           </sc-if>
 
           <div style="display: flex; align-items: center; justify-content: space-between; gap: var(--space-4); flex-wrap: wrap; margin-top: var(--space-7); padding-top: var(--space-6); border-top: 1px solid var(--line-hairline)">
+            <span style="font: var(--type-caption); color: var(--text-muted)">{{ remainLabel }}</span>
             <div style="display: flex; gap: var(--space-3); align-items: center">
               <sc-if value="{{ canBack }}" hint-placeholder-val="{{ false }}">
-                <x-import component-from-global-scope="GotlibArchitectureDesignSystem_9f6223.Button" variant="outline" size="md" with-arrow="{{ false }}" on-click="{{ back }}" hint-size="auto,44px">חזרה</x-import>
+                <x-import component-from-global-scope="GotlibArchitectureDesignSystem_9f6223.Button" variant="outline" size="lg" with-arrow="{{ false }}" on-click="{{ back }}" hint-size="auto,52px">חזרה</x-import>
               </sc-if>
               <sc-if value="{{ isLast }}" hint-placeholder-val="{{ false }}">
                 <x-import component-from-global-scope="GotlibArchitectureDesignSystem_9f6223.Button" variant="primary" size="lg" on-click="{{ submit }}" hint-size="auto,52px">שליחת השאלון</x-import>
@@ -204,7 +205,6 @@
                 <x-import component-from-global-scope="GotlibArchitectureDesignSystem_9f6223.Button" variant="primary" size="lg" on-click="{{ next }}" hint-size="auto,52px">המשך</x-import>
               </sc-if>
             </div>
-            <span style="font: var(--type-caption); color: var(--text-muted)">{{ remainLabel }}</span>
           </div>
 
         </div>
@@ -237,7 +237,7 @@
 <script type="text/x-dc" data-dc-script data-props="{&quot;mood&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;כהה ומונומנטלי&quot;,&quot;בהיר ואוורירי&quot;,&quot;חם ונייר&quot;],&quot;default&quot;:&quot;כהה ומונומנטלי&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;אווירה&quot;},&quot;accent&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;options&quot;:[&quot;#B9A88F&quot;,&quot;#8C7B62&quot;,&quot;#5C6B73&quot;,&quot;#A8613C&quot;],&quot;default&quot;:&quot;#B9A88F&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;אווירה&quot;},&quot;density&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;מרווח&quot;,&quot;צפוף&quot;],&quot;default&quot;:&quot;מרווח&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;אווירה&quot;}}">
 const FIELDS = ['fullName','phone','email','whatsapp','org','typeOther','weekday','shabbat','extraSpaces','city','planStatus','targetDate','timePressure','budget','raised','notes'];
 const STEP_NAMES = ['פרטי קשר','סוג הפרויקט','גודל ושימוש','מיקום וסטטוס','לוח זמנים','תקציב ומימון','סדר עדיפויות','הערות'];
-const TYPES = ['בית כנסת חדש','הרחבה / תוספת לבית כנסת קיים','שיפוץ בית כנסת','מקווה','בני ילדים','בית ספר','מבנה מגורים','אחר'];
+const TYPES = ['בית כנסת חדש','הרחבה / תוספת לבית כנסת קיים','שיפוץ בית כנסת','מקווה','גני ילדים','בית ספר','מבנה מגורים','אחר'];
 const FUNDING = ['תרומות פרטיות','רשות מקומית / מועצה דתית','משרד ממשלתי','עמותה','אחר'];
 const PRIOS = ['עמידה בתקציב','מהירות תהליך','התאמה מדויקת להלכה','איכות ועיצוב','ליווי צמוד לאורך כל הדרך'];
 const TOTAL = 8;
