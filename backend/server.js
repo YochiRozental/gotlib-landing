@@ -286,29 +286,8 @@ async function getPdfFontBytes() {
   return pdfFontBytesPromise;
 }
 
-function reverseCodepoints(text) {
-  return Array.from(String(text ?? '')).reverse().join('');
-}
-
 function rtlVisual(text) {
-  const input = String(text ?? '').replace(/\u200e|\u200f/g, '');
-  if (!input) return '';
-
-  const ltrRuns = [];
-  const placeholderBase = 0xE000;
-  const masked = input.replace(
-    /(?:https?:\/\/|www\.)[^\s]+|[\w.+-]+@[\w.-]+\.[A-Za-z]{2,}|[A-Za-z]+(?:[A-Za-z0-9._+:/?#%=&(),-]*[A-Za-z0-9])?|[0-9]+(?:[.,:/-][0-9]+)*/g,
-    (match) => {
-      const index = ltrRuns.push(match) - 1;
-      return String.fromCodePoint(placeholderBase + index);
-    }
-  );
-
-  let visual = reverseCodepoints(masked);
-  for (let i = 0; i < ltrRuns.length; i += 1) {
-    visual = visual.replace(String.fromCodePoint(placeholderBase + i), ltrRuns[i]);
-  }
-  return visual;
+  return String(text ?? '').replace(/\u200e|\u200f/g, '');
 }
 
 async function createPdf({ deal, client, answers }) {
