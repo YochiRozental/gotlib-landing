@@ -129,11 +129,9 @@
           <sc-if value="{{ isStep.s5 }}" hint-placeholder-val="{{ false }}">
             <div style="animation: riseIn 700ms cubic-bezier(.16,1,.3,1) both">
               <h2 style="margin: 0 0 var(--space-2); font: var(--type-h3); color: var(--text-heading)">לוח זמנים</h2>
-              <p style="margin: 0 0 var(--space-6); font: var(--type-small); color: var(--text-muted)">גם תאריך משוער עוזר לתכנן את שלבי העבודה.</p>
+              <p style="margin: 0 0 var(--space-6); font: var(--type-small); color: var(--text-muted)">נרצה להבין מהו היעד ומה משפיע עליו.</p>
               <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: var(--space-6)">
                 <x-import component-from-global-scope="GotlibArchitectureDesignSystem_9f6223.TextField" tone="paper" label="מתי תרצו להגיע לחנוכת הבית? (חודש / שנה משוערת)" type="month" value="{{ v.targetDate }}" on-change="{{ on.targetDate }}" hint-size="100%,64px"></x-import>
-              </div>
-              <div style="margin-top: var(--space-6)">
                 <x-import component-from-global-scope="GotlibArchitectureDesignSystem_9f6223.TextArea" tone="paper" rows="{{ 3 }}" label="האם יש לחץ זמנים מיוחד? (תאריך יעד, תרומה שמותנית וכו')" value="{{ v.timePressure }}" on-change="{{ on.timePressure }}" hint-size="100%,110px"></x-import>
               </div>
             </div>
@@ -142,19 +140,16 @@
           <sc-if value="{{ isStep.s6 }}" hint-placeholder-val="{{ false }}">
             <div style="animation: riseIn 700ms cubic-bezier(.16,1,.3,1) both">
               <h2 style="margin: 0 0 var(--space-2); font: var(--type-h3); color: var(--text-heading)">תקציב ומימון</h2>
-              <p style="margin: 0 0 var(--space-6); font: var(--type-small); color: var(--text-muted)">המידע הזה נשאר בינינו ומשמש לבניית תהליך מציאותי.</p>
+              <p style="margin: 0 0 var(--space-6); font: var(--type-small); color: var(--text-muted)">גם הערכה גסה תעזור לנו להתאים את התהליך.</p>
               <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: var(--space-6)">
                 <x-import component-from-global-scope="GotlibArchitectureDesignSystem_9f6223.TextField" tone="paper" label="התקציב המשוער שיש כרגע לפרויקט" value="{{ v.budget }}" on-change="{{ on.budget }}" hint-size="100%,64px"></x-import>
                 <x-import component-from-global-scope="GotlibArchitectureDesignSystem_9f6223.TextField" tone="paper" label="האם כבר גויסו כספים? כמה בערך?" value="{{ v.raised }}" on-change="{{ on.raised }}" hint-size="100%,64px"></x-import>
               </div>
-              <div style="margin-top: var(--space-7)">
+              <div style="margin-top: var(--space-6)">
                 <span style="display: block; font: var(--type-small); color: var(--text-muted); margin-bottom: var(--space-3)">מאיפה מגיע המימון העיקרי?</span>
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: var(--space-3)">
+                <div style="display: flex; flex-wrap: wrap; gap: var(--space-3)">
                   <sc-for list="{{ fundingOptions }}" as="opt" hint-placeholder-count="5">
-                    <button type="button" onClick="{{ opt.onClick }}" style="display: flex; align-items: center; gap: var(--space-3); text-align: right; padding: var(--space-4); background: {{ opt.bg }}; color: {{ opt.fg }}; border: 1px solid {{ opt.bc }}; border-radius: var(--radius-0); font: var(--type-body); cursor: pointer; transition: var(--transition-ui)">
-                      <span aria-hidden="true" style="flex: 0 0 auto; width: 10px; height: 10px; background: {{ opt.markBg }}; outline: 1px solid {{ opt.markBorder }}; outline-offset: 3px"></span>
-                      <span>{{ opt.label }}</span>
-                    </button>
+                    <button type="button" onClick="{{ opt.onClick }}" style="padding: var(--space-3) var(--space-4); background: {{ opt.bg }}; color: {{ opt.fg }}; border: 1px solid {{ opt.bc }}; border-radius: var(--radius-0); font: var(--type-small); cursor: pointer; transition: var(--transition-ui)">{{ opt.label }}</button>
                   </sc-for>
                 </div>
               </div>
@@ -164,16 +159,14 @@
           <sc-if value="{{ isStep.s7 }}" hint-placeholder-val="{{ false }}">
             <div style="animation: riseIn 700ms cubic-bezier(.16,1,.3,1) both">
               <h2 style="margin: 0 0 var(--space-2); font: var(--type-h3); color: var(--text-heading)">סדר עדיפויות</h2>
-              <p style="margin: 0 0 var(--space-6); font: var(--type-small); color: var(--text-muted)">דרגו את החשיבות של כל סעיף. 1 = פחות חשוב, 5 = קריטי.</p>
-              <div>
+              <p style="margin: 0 0 var(--space-6); font: var(--type-small); color: var(--text-muted)">דרגו כל נושא מ-1 (פחות חשוב) עד 5 (הכי חשוב).</p>
+              <div style="display: grid; gap: var(--space-4)">
                 <sc-for list="{{ prioRows }}" as="row" hint-placeholder-count="5">
-                  <div style="display: flex; align-items: center; justify-content: space-between; gap: var(--space-5); flex-wrap: wrap; padding: var(--space-4) 0; border-bottom: 1px solid var(--line-hairline)">
-                    <span style="font: var(--type-body); color: var(--text-heading)">{{ row.label }}</span>
-                    <div style="display: flex; gap: 6px">
-                      <sc-for list="{{ row.cells }}" as="cell" hint-placeholder-count="5">
-                        <button type="button" onClick="{{ cell.onClick }}" aria-label="{{ cell.aria }}" style="width: 34px; height: 34px; padding: 0; border: 1px solid {{ cell.bc }}; border-radius: var(--radius-0); background: {{ cell.bg }}; color: {{ cell.fg }}; font: var(--type-caption); cursor: pointer; transition: var(--transition-ui)">{{ cell.n }}</button>
-                      </sc-for>
-                    </div>
+                  <div style="display: grid; grid-template-columns: minmax(180px, 1fr) repeat(5, 44px); gap: 5px; align-items: center">
+                    <span style="font: var(--type-small); color: var(--text-heading)">{{ row.label }}</span>
+                    <sc-for list="{{ row.cells }}" as="cell" hint-placeholder-count="5">
+                      <button type="button" aria-label="{{ cell.aria }}" onClick="{{ cell.onClick }}" style="width: 44px; height: 40px; background: {{ cell.bg }}; color: {{ cell.fg }}; border: 1px solid {{ cell.bc }}; border-radius: 0; cursor: pointer; font: var(--type-small); transition: var(--transition-ui)">{{ cell.n }}</button>
+                    </sc-for>
                   </div>
                 </sc-for>
               </div>
@@ -183,42 +176,40 @@
           <sc-if value="{{ isStep.s8 }}" hint-placeholder-val="{{ false }}">
             <div style="animation: riseIn 700ms cubic-bezier(.16,1,.3,1) both">
               <h2 style="margin: 0 0 var(--space-2); font: var(--type-h3); color: var(--text-heading)">שאלות נוספות / הערות</h2>
-              <p style="margin: 0 0 var(--space-6); font: var(--type-small); color: var(--text-muted)">כתבו כל דבר חשוב שכדאי שאדע לפני הפגישה.</p>
-              <x-import component-from-global-scope="GotlibArchitectureDesignSystem_9f6223.TextArea" tone="paper" rows="{{ 7 }}" label="הערות" value="{{ v.notes }}" on-change="{{ on.notes }}" hint-size="100%,200px"></x-import>
+              <p style="margin: 0 0 var(--space-6); font: var(--type-small); color: var(--text-muted)">כל פרט נוסף שחשוב שנדע לפני הפגישה.</p>
+              <x-import component-from-global-scope="GotlibArchitectureDesignSystem_9f6223.TextArea" tone="paper" rows="{{ 6 }}" label="הערות" value="{{ v.notes }}" on-change="{{ on.notes }}" hint-size="100%,160px"></x-import>
             </div>
           </sc-if>
 
-          <sc-if value="{{ err }}" hint-placeholder-val="{{ false }}">
-            <p style="margin: var(--space-6) 0 0; font: var(--type-small); color: var(--taupe-600); border-bottom: 1px solid var(--taupe-400); display: inline-block; padding-bottom: var(--space-1)">{{ err }}</p>
-          </sc-if>
-
-          <div style="display: flex; align-items: center; justify-content: space-between; gap: var(--space-4); flex-wrap: wrap; margin-top: var(--space-7); padding-top: var(--space-6); border-top: 1px solid var(--line-hairline)">
-            <div style="display: flex; gap: var(--space-3); align-items: center">
+          <div style="display: flex; align-items: center; justify-content: space-between; gap: var(--space-4); margin-top: var(--space-8); padding-top: var(--space-5); border-top: 1px solid var(--line-hairline)">
+            <div>
               <sc-if value="{{ canBack }}" hint-placeholder-val="{{ false }}">
-                <x-import component-from-global-scope="GotlibArchitectureDesignSystem_9f6223.Button" variant="outline" size="md" with-arrow="{{ false }}" on-click="{{ back }}" hint-size="auto,44px">חזרה</x-import>
+                <x-import component-from-global-scope="GotlibArchitectureDesignSystem_9f6223.Button" variant="ghost" size="md" with-arrow="{{ false }}" on-click="{{ back }}" hint-size="auto,44px">הקודם</x-import>
+              </sc-if>
+            </div>
+            <div style="display: flex; align-items: center; gap: var(--space-4)">
+              <span style="font: var(--type-caption); color: var(--text-muted)">{{ remainLabel }}</span>
+              <sc-if value="{{ notLast }}" hint-placeholder-val="{{ true }}">
+                <x-import component-from-global-scope="GotlibArchitectureDesignSystem_9f6223.Button" variant="primary" size="md" on-click="{{ next }}" hint-size="auto,44px">המשך</x-import>
               </sc-if>
               <sc-if value="{{ isLast }}" hint-placeholder-val="{{ false }}">
-                <x-import component-from-global-scope="GotlibArchitectureDesignSystem_9f6223.Button" variant="primary" size="lg" on-click="{{ submit }}" hint-size="auto,52px">שליחת השאלון</x-import>
-              </sc-if>
-              <sc-if value="{{ notLast }}" hint-placeholder-val="{{ true }}">
-                <x-import component-from-global-scope="GotlibArchitectureDesignSystem_9f6223.Button" variant="primary" size="lg" on-click="{{ next }}" hint-size="auto,52px">המשך</x-import>
+                <x-import component-from-global-scope="GotlibArchitectureDesignSystem_9f6223.Button" variant="primary" size="md" on-click="{{ submit }}" hint-size="auto,44px">שליחת השאלון</x-import>
               </sc-if>
             </div>
-            <span style="font: var(--type-caption); color: var(--text-muted)">{{ remainLabel }}</span>
           </div>
 
+          <sc-if value="{{ err }}" hint-placeholder-val="{{ false }}">
+            <div role="alert" style="margin-top: var(--space-4); padding: var(--space-3) var(--space-4); background: var(--paper-100); border-right: 3px solid var(--taupe-500); font: var(--type-small); color: var(--text-body)">{{ err }}</div>
+          </sc-if>
         </div>
       </sc-if>
 
       <sc-if value="{{ done }}" hint-placeholder-val="{{ false }}">
-        <div style="background: var(--surface-card); box-shadow: var(--shadow-card); padding: clamp(28px, 6vw, 72px); animation: riseIn 700ms cubic-bezier(.16,1,.3,1) both">
-          <div style="border: 1px solid var(--taupe-400); padding: clamp(24px, 5vw, 56px); display: flex; flex-direction: column; gap: var(--space-5); align-items: flex-start">
+        <div style="background: var(--surface-card); box-shadow: var(--shadow-card); padding: clamp(36px, 7vw, 72px); text-align: center">
+          <div style="max-width: 560px; margin: 0 auto; display: grid; gap: var(--space-5)">
             <span dir="ltr" style="font: var(--type-eyebrow); letter-spacing: var(--ls-eyebrow); text-transform: uppercase; color: var(--taupe-600)">Received</span>
-            <h2 style="margin: 0; font: var(--type-h2); color: var(--text-heading)">תודה שמילאתם.</h2>
-            <p style="margin: 0; max-width: 560px; font: var(--type-lead); color: var(--text-body); text-wrap: pretty">אחרי שאקבל את התשובות אחזור אליכם עם הצעה לתהליך המשך – כולל אומדן ראשוני ושלבי העבודה.</p>
-            <div style="display: flex; gap: var(--space-4); flex-wrap: wrap; padding-top: var(--space-3)">
-              <x-import component-from-global-scope="GotlibArchitectureDesignSystem_9f6223.Button" variant="outline" size="md" with-arrow="{{ false }}" on-click="{{ restart }}" hint-size="auto,44px">מילוי שאלון נוסף</x-import>
-            </div>
+            <h2 style="margin: 0; font: var(--type-h2); color: var(--text-heading)">השאלון התקבל בהצלחה</h2>
+            <p style="margin: 0; font: var(--type-lead); color: var(--text-muted)">תודה שמילאתם את השאלון. התשובות נשמרו בעסקה ואנחנו נחזור אליכם להמשך התהליך.</p>
           </div>
         </div>
       </sc-if>
@@ -241,9 +232,19 @@ const TYPES = ['בית כנסת חדש','הרחבה / תוספת לבית כנס
 const FUNDING = ['תרומות פרטיות','רשות מקומית / מועצה דתית','משרד ממשלתי','עמותה','אחר'];
 const PRIOS = ['עמידה בתקציב','מהירות תהליך','התאמה מדויקת להלכה','איכות ועיצוב','ליווי צמוד לאורך כל הדרך'];
 const TOTAL = 8;
+const API_URL = 'https://gotlib-landing-api.onrender.com';
+
+function getQuestionnaireContext() {
+  if (typeof window === 'undefined') return { dealId: '', token: '' };
+  const params = new URLSearchParams(window.location.search);
+  return {
+    dealId: String(params.get('deal') || '').trim(),
+    token: String(params.get('token') || '').trim()
+  };
+}
 
 class Component extends DCLogic {
-  state = { step: 1, done: false, err: '', f: {}, types: [], plot: '', funding: '', prio: {} };
+  state = { step: 1, done: false, err: '', submitting: false, f: {}, types: [], plot: '', funding: '', prio: {} };
 
   setField = (k) => (e) => {
     const val = e && e.target ? e.target.value : e;
@@ -354,31 +355,80 @@ class Component extends DCLogic {
       next: () => this.go(1),
       back: () => this.go(-1),
       submit: async () => {
+        if (this.state.submitting) return;
         const s = this.state;
         const f = s.f || {};
-        this.setState({ err: 'שולח את השאלון...' });
+        const context = getQuestionnaireContext();
+
+        if (!/^\d+$/.test(context.dealId) || !context.token) {
+          this.setState({ err: 'הקישור לשאלון אינו תקין. יש לפתוח את הקישור שנשלח אליכם במייל.' });
+          return;
+        }
+
+        this.setState({ err: 'שולח את השאלון...', submitting: true });
         try {
-          const response = await fetch('https://gotlib-landing-api.onrender.com/api/leads', {
+          const response = await fetch(API_URL + '/api/questionnaire/submit', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-              fullName: f.fullName || '',
-              phone: f.phone || '',
-              email: f.email || '',
-              whatsapp: f.whatsapp || '',
-              org: f.org || '',
-              types: Array.isArray(s.types) ? s.types : []
+              schemaVersion: 1,
+              dealId: context.dealId,
+              token: context.token,
+              answers: {
+                contact: {
+                  fullName: f.fullName || '',
+                  phone: f.phone || '',
+                  email: f.email || '',
+                  whatsapp: f.whatsapp || '',
+                  org: f.org || ''
+                },
+                projectType: {
+                  types: Array.isArray(s.types) ? s.types : [],
+                  typeOther: f.typeOther || ''
+                },
+                sizeAndUse: {
+                  weekday: f.weekday || '',
+                  shabbat: f.shabbat || '',
+                  extraSpaces: f.extraSpaces || ''
+                },
+                locationAndStatus: {
+                  city: f.city || '',
+                  plot: s.plot || '',
+                  planStatus: f.planStatus || ''
+                },
+                timeline: {
+                  targetDate: f.targetDate || '',
+                  timePressure: f.timePressure || ''
+                },
+                budgetAndFunding: {
+                  budget: f.budget || '',
+                  raised: f.raised || '',
+                  funding: s.funding || ''
+                },
+                priorities: {
+                  budget: Number(s.prio['עמידה בתקציב'] || 0),
+                  speed: Number(s.prio['מהירות תהליך'] || 0),
+                  halacha: Number(s.prio['התאמה מדויקת להלכה'] || 0),
+                  design: Number(s.prio['איכות ועיצוב'] || 0),
+                  support: Number(s.prio['ליווי צמוד לאורך כל הדרך'] || 0)
+                },
+                notes: f.notes || ''
+              }
             })
           });
-          if (!response.ok) throw new Error('submit failed');
-          this.setState({ done: true, err: '' });
+
+          const result = await response.json().catch(() => ({}));
+          if (!response.ok || !result.ok) {
+            throw new Error(result.error || 'submit failed');
+          }
+
+          this.setState({ done: true, err: '', submitting: false });
           if (typeof window !== 'undefined') window.scrollTo({ top: 0, behavior: 'smooth' });
         } catch (error) {
           console.error('Questionnaire submit failed', error);
-          this.setState({ err: 'לא הצלחנו לשלוח את השאלון. נסו שוב בעוד רגע.' });
+          this.setState({ submitting: false, err: 'לא הצלחנו לשלוח את השאלון. נסו שוב בעוד רגע.' });
         }
-      },
-      restart: () => this.setState({ step: 1, done: false, f: {}, types: [], plot: '', funding: '', prio: {}, err: '' })
+      }
     };
   }
 }
